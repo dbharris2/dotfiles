@@ -39,15 +39,16 @@ keys = [
     Key([], "Print", lazy.spawn("flameshot gui")),
 ]
 
-groups = [Group(i) for i in "asd"]
+group_names = [
+    ('WWW', {'layout': 'monadtall'}),
+    ('SLACK', {'layout': 'monadtall'})
+]
 
-for i in groups:
-    keys.extend([
-        Key([mod], i.name, lazy.group[i.name].toscreen(),
-            desc="Switch to group {}".format(i.name)),
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
-            desc="Switch to & move focused window to group {}".format(i.name)),
-    ])
+groups = [Group(name, **kwargs) for name, kwargs in group_names]
+
+for i, (name, kwargs) in enumerate(group_names, 1):
+    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))
+    keys.append(Key([mod, 'shift'], str(i), lazy.window.togroup(name, switch_group=True)))
 
 colors = [["#292d3e", "#292d3e"], # panel background
           ["#434758", "#434758"], # background for current screen tab
