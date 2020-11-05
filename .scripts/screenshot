@@ -1,2 +1,0 @@
-#!/bin/bash
-scrot -s /tmp/foo.png -e 'xclip -selection clipboard -target image/png -i $f && rm /tmp/foo.png'
