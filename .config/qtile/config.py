@@ -36,7 +36,7 @@ keys = [
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master 2%- unmute")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master 2%+ unmute")),
 
-    Key([], "Print", lazy.spawn("alacritty sh -e screenshot")),
+    Key([], "Print", lazy.spawn("flameshot gui")),
 ]
 
 groups = [Group(i) for i in "asd"]
