@@ -87,8 +87,46 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+def get_disclosure_bg_color(index):
+    if index == 0:
+        return colors["PANEL_BG"]
+    elif index % 2 == 0:
+        return colors["ODD_WIDGETS"]
+    else:
+        return colors["EVEN_WIDGETS"]
+
+def get_color(index):
+    if index % 2 == 0:
+        return colors["EVEN_WIDGETS"]
+    else:
+        return colors["ODD_WIDGETS"]
+
+def get_disclosure_fg_color(index):
+    return get_color(index)
+
+def get_icon_bg_color(index):
+    return get_color(index)
+
+def get_composite_widget(index, icon, icon_size, widgets):
+    composite_widget = [
+            widget.TextBox(
+                background = get_disclosure_bg_color(index),
+                fontsize = 32,
+                foreground = get_disclosure_fg_color(index),
+                padding = -4,
+                text = '◀',
+                ),
+            widget.TextBox(
+                background = get_icon_bg_color(index),
+                fontsize = icon_size,
+                text = icon,
+                ),
+            ]
+    composite_widget.extend(widgets)
+    return composite_widget
+
 def get_widgets():
-    return [
+    widgets = [
             widget.Sep(
                 linewidth = 0,
                 padding = 6,
@@ -111,77 +149,41 @@ def get_widgets():
                 padding = 6,
                 ),
             widget.WindowName(),
-            widget.TextBox(
-                background = colors["PANEL_BG"],
-                fontsize = 32,
-                foreground = colors["EVEN_WIDGETS"],
-                padding = -4,
-                text = '◀',
-                ),
-            widget.TextBox(
-                background = colors["EVEN_WIDGETS"],
-                fontsize = 22,
-                text = '⟳',
-                ),
+            ]
+    widgets.extend(
+        get_composite_widget(0, '⟳', 24, [
             widget.CheckUpdates(
                 background = colors["EVEN_WIDGETS"],
-                update_interval = 1800,
-                ),
-            widget.TextBox(
-                background = colors["EVEN_WIDGETS"],
-                fontsize = 32,
-                foreground = colors["ODD_WIDGETS"],
-                padding = -4,
-                text = '◀',
-                ),
+                update_interval = 1800),
+            ])
+        )
+    widgets.extend(
+        get_composite_widget(1, '', None, [
             widget.CurrentLayoutIcon(
                 background = colors["ODD_WIDGETS"],
-                foreground = colors["ODD_WIDGETS"],
-                scale = 0.7,
-                ),
+                scale = 0.7),
             widget.CurrentLayout(
-                background = colors["ODD_WIDGETS"],
-                ),
-            widget.TextBox(
-                background = colors["ODD_WIDGETS"],
-                fontsize = 32,
-                foreground = colors["EVEN_WIDGETS"],
-                padding = -4,
-                text = '◀',
-                ),
-            widget.TextBox(
-                background = colors["EVEN_WIDGETS"],
-                text = '🐏',
-                ),
-            widget.Memory(
-                background = colors["EVEN_WIDGETS"],
-                ),
-            widget.TextBox(
-                background = colors["EVEN_WIDGETS"],
-                fontsize = 32,
-                foreground = colors["ODD_WIDGETS"],
-                padding = -4,
-                text = '◀',
-                ),
-            widget.TextBox(
-                background = colors["ODD_WIDGETS"],
-                text = '🔊',
-                ),
-            widget.PulseVolume(
-                background = colors["ODD_WIDGETS"],
-                ),
-            widget.TextBox(
-                background = colors["ODD_WIDGETS"],
-                fontsize = 32,
-                foreground = colors["EVEN_WIDGETS"],
-                padding = -4,
-                text = '◀',
-                ),
+                background = colors["ODD_WIDGETS"]),
+            ])
+        )
+    widgets.extend(
+        get_composite_widget(2, '🐏', 14, [
+            widget.Memory(background = colors["EVEN_WIDGETS"]),
+            ])
+        )
+    widgets.extend(
+        get_composite_widget(3, '🔊', 14, [
+            widget.PulseVolume(background = colors["ODD_WIDGETS"])
+            ])
+        )
+    widgets.extend(
+        get_composite_widget(4, '', None, [
             widget.Clock(
                 background = colors["EVEN_WIDGETS"],
-                format='%a %b %d  [ %H:%M %p ]',
-                ),
-            ]
+                format='%a %b %d  [ %H:%M %p ]'),
+            ])
+        )
+    return widgets
 
 screens = [Screen(top=bar.Bar(get_widgets(), 24))]
 
