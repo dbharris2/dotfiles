@@ -112,7 +112,7 @@ def get_widgets():
                 padding = 6,
                 ),
             widget.WindowName(),
-                widget.TextBox(
+            widget.TextBox(
                 background = colors[0],
                 fontsize = 32,
                 foreground = colors[5],
@@ -121,7 +121,8 @@ def get_widgets():
                 ),
             widget.TextBox(
                 background = colors[5],
-                text = 'ᗧ',
+                fontsize = 22,
+                text = '⟳',
                 ),
             widget.CheckUpdates(
                 background = colors[5],
