@@ -88,105 +88,102 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-screens = [
-    Screen(
-        top=bar.Bar(
-            [
-                widget.Sep(
-                    linewidth = 0,
-                    padding = 6,
-                    ),
-                widget.GroupBox(
-                    active = colors[2],
-                    background = colors[0],
-                    font = "Ubuntu Bold",
-                    fontsize = 9,
-                    foreground = colors[2],
-                    highlight_color = colors[1],
-                    highlight_method = "block",
-                    inactive = colors[2],
-                    other_current_screen_border = colors[2],
-                    other_screen_border = colors[2],
-                    this_current_screen_border = colors[4],
-                    this_screen_border = colors[4],
-                    ),
-                widget.Sep(
-                    padding = 6,
-                    ),
-                widget.WindowName(),
+def get_widgets():
+    return [
+            widget.Sep(
+                linewidth = 0,
+                padding = 6,
+                ),
+            widget.GroupBox(
+                active = colors[2],
+                background = colors[0],
+                font = "Ubuntu Bold",
+                fontsize = 9,
+                foreground = colors[2],
+                highlight_color = colors[1],
+                highlight_method = "block",
+                inactive = colors[2],
+                other_current_screen_border = colors[2],
+                other_screen_border = colors[2],
+                this_current_screen_border = colors[4],
+                this_screen_border = colors[4],
+                ),
+            widget.Sep(
+                padding = 6,
+                ),
+            widget.WindowName(),
                 widget.TextBox(
-                    background = colors[0],
-                    fontsize = 32,
-                    foreground = colors[5],
-                    padding = -4,
-                    text = '◀',
-                    ),
-                widget.TextBox(
-                    background = colors[5],
-                    text = 'ᗧ',
-                    ),
-               widget.CheckUpdates(
-                    background = colors[5],
-                    update_interval = 1800,
-                    ),
-               widget.TextBox(
-                    background = colors[5],
-                    fontsize = 32,
-                    foreground = colors[4],
-                    padding = -4,
-                    text = '◀',
-                    ),
-                widget.CurrentLayoutIcon(
-                    background = colors[4],
-                    foreground = colors[4],
-                    scale = 0.7,
-                    ),
-                widget.CurrentLayout(
-                    background = colors[4],
-                    ),
-                widget.TextBox(
-                    background = colors[4],
-                    fontsize = 32,
-                    foreground = colors[5],
-                    padding = -4,
-                    text = '◀',
-                    ),
-                widget.TextBox(
-                    background = colors[5],
-                    text = '🐏',
-                    ),
-                widget.Memory(
-                    background = colors[5],
-                    ),
-                widget.TextBox(
-                    background = colors[5],
-                    fontsize = 32,
-                    foreground = colors[4],
-                    padding = -4,
-                    text = '◀',
-                    ),
-                widget.TextBox(
-                    background = colors[4],
-                    text = '🔊',
-                    ),
-                widget.PulseVolume(
-                    background = colors[4],
-                    ),
-                widget.TextBox(
-                    background = colors[4],
-                    fontsize = 32,
-                    foreground = colors[5],
-                    padding = -4,
-                    text = '◀',
-                    ),
-                widget.Clock(
-                    background = colors[5],
-                    format='%a %b %d  [ %H:%M %p ]',
-                    ),
-            ], 24
-        ),
-    ),
-]
+                background = colors[0],
+                fontsize = 32,
+                foreground = colors[5],
+                padding = -4,
+                text = '◀',
+                ),
+            widget.TextBox(
+                background = colors[5],
+                text = 'ᗧ',
+                ),
+            widget.CheckUpdates(
+                background = colors[5],
+                update_interval = 1800,
+                ),
+            widget.TextBox(
+                background = colors[5],
+                fontsize = 32,
+                foreground = colors[4],
+                padding = -4,
+                text = '◀',
+                ),
+            widget.CurrentLayoutIcon(
+                background = colors[4],
+                foreground = colors[4],
+                scale = 0.7,
+                ),
+            widget.CurrentLayout(
+                background = colors[4],
+                ),
+            widget.TextBox(
+                background = colors[4],
+                fontsize = 32,
+                foreground = colors[5],
+                padding = -4,
+                text = '◀',
+                ),
+            widget.TextBox(
+                background = colors[5],
+                text = '🐏',
+                ),
+            widget.Memory(
+                background = colors[5],
+                ),
+            widget.TextBox(
+                background = colors[5],
+                fontsize = 32,
+                foreground = colors[4],
+                padding = -4,
+                text = '◀',
+                ),
+            widget.TextBox(
+                background = colors[4],
+                text = '🔊',
+                ),
+            widget.PulseVolume(
+                background = colors[4],
+                ),
+            widget.TextBox(
+                background = colors[4],
+                fontsize = 32,
+                foreground = colors[5],
+                padding = -4,
+                text = '◀',
+                ),
+            widget.Clock(
+                background = colors[5],
+                format='%a %b %d  [ %H:%M %p ]',
+                ),
+            ]
+
+screens = [Screen(top=bar.Bar(get_widgets(), 24))]
 
 # Drag floating layouts.
 mouse = [
