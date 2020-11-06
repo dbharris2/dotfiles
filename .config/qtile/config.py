@@ -50,13 +50,13 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))
     keys.append(Key([mod, 'shift'], str(i), lazy.window.togroup(name, switch_group=True)))
 
-colors = [["#292d3e", "#292d3e"], # panel background
-          ["#434758", "#434758"], # background for current screen tab
-          ["#ffffff", "#ffffff"], # font color for group names
-          ["#ff5555", "#ff5555"], # border line color for current tab
-          ["#8d62a9", "#8d62a9"], # border line color for other tab and odd widgets
-          ["#668bd7", "#668bd7"], # color for the even widgets
-          ["#e1acff", "#e1acff"]] # window name
+colors = {"EVEN_WIDGETS": "#668bd7",
+          "ODD_WIDGETS": "#8d62a9",
+          "PANEL_BG": "#292d3e",
+          "GROUP_BG": "#434758",
+          "TAB_BORDER": "#8d62a9",
+          "WHITE": "#ffffff"
+         }
 
 layout_theme = {"border_focus": '#8d62a9',
                 "border_normal": '#543948',
@@ -79,9 +79,8 @@ layouts = [
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
-
 widget_defaults = dict(
-    background = colors[0],
+    background = colors["PANEL_BG"],
     font = 'Ubuntu Mono',
     fontsize = 12,
     padding = 4,
@@ -95,91 +94,91 @@ def get_widgets():
                 padding = 6,
                 ),
             widget.GroupBox(
-                active = colors[2],
-                background = colors[0],
+                active = colors["WHITE"],
+                background = colors["PANEL_BG"],
                 font = "Ubuntu Bold",
                 fontsize = 9,
-                foreground = colors[2],
-                highlight_color = colors[1],
+                foreground = colors["WHITE"],
+                highlight_color = colors["GROUP_BG"],
                 highlight_method = "block",
-                inactive = colors[2],
-                other_current_screen_border = colors[2],
-                other_screen_border = colors[2],
-                this_current_screen_border = colors[4],
-                this_screen_border = colors[4],
+                inactive = colors["WHITE"],
+                other_current_screen_border = colors["WHITE"],
+                other_screen_border = colors["WHITE"],
+                this_current_screen_border = colors["TAB_BORDER"],
+                this_screen_border = colors["TAB_BORDER"],
                 ),
             widget.Sep(
                 padding = 6,
                 ),
             widget.WindowName(),
             widget.TextBox(
-                background = colors[0],
+                background = colors["PANEL_BG"],
                 fontsize = 32,
-                foreground = colors[5],
+                foreground = colors["EVEN_WIDGETS"],
                 padding = -4,
                 text = '◀',
                 ),
             widget.TextBox(
-                background = colors[5],
+                background = colors["EVEN_WIDGETS"],
                 fontsize = 22,
                 text = '⟳',
                 ),
             widget.CheckUpdates(
-                background = colors[5],
+                background = colors["EVEN_WIDGETS"],
                 update_interval = 1800,
                 ),
             widget.TextBox(
-                background = colors[5],
+                background = colors["EVEN_WIDGETS"],
                 fontsize = 32,
-                foreground = colors[4],
+                foreground = colors["ODD_WIDGETS"],
                 padding = -4,
                 text = '◀',
                 ),
             widget.CurrentLayoutIcon(
-                background = colors[4],
-                foreground = colors[4],
+                background = colors["ODD_WIDGETS"],
+                foreground = colors["ODD_WIDGETS"],
                 scale = 0.7,
                 ),
             widget.CurrentLayout(
-                background = colors[4],
+                background = colors["ODD_WIDGETS"],
                 ),
             widget.TextBox(
-                background = colors[4],
+                background = colors["ODD_WIDGETS"],
                 fontsize = 32,
-                foreground = colors[5],
+                foreground = colors["EVEN_WIDGETS"],
                 padding = -4,
                 text = '◀',
                 ),
             widget.TextBox(
-                background = colors[5],
+                background = colors["EVEN_WIDGETS"],
                 text = '🐏',
                 ),
             widget.Memory(
-                background = colors[5],
+                background = colors["EVEN_WIDGETS"],
                 ),
             widget.TextBox(
-                background = colors[5],
+                background = colors["EVEN_WIDGETS"],
                 fontsize = 32,
-                foreground = colors[4],
+                foreground = colors["ODD_WIDGETS"],
                 padding = -4,
                 text = '◀',
                 ),
             widget.TextBox(
-                background = colors[4],
+                background = colors["ODD_WIDGETS"],
                 text = '🔊',
                 ),
             widget.PulseVolume(
-                background = colors[4],
+                background = colors["ODD_WIDGETS"],
                 ),
             widget.TextBox(
-                background = colors[4],
+                background = colors["ODD_WIDGETS"],
                 fontsize = 32,
-                foreground = colors[5],
+                foreground = colors["EVEN_WIDGETS"],
                 padding = -4,
                 text = '◀',
                 ),
             widget.Clock(
-                background = colors[5],
+                background = colors["EVEN_WIDGETS"],
                 format='%a %b %d  [ %H:%M %p ]',
                 ),
             ]
