@@ -151,7 +151,7 @@ def get_widgets():
             widget.WindowName(),
             ]
     widgets.extend(
-        get_composite_widget(0, '⟳', 24, [
+        get_composite_widget(0, '⟳', 22, [
             widget.CheckUpdates(
                 background = colors["EVEN_WIDGETS"],
                 update_interval = 1800),
