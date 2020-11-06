@@ -50,8 +50,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))
     keys.append(Key([mod, 'shift'], str(i), lazy.window.togroup(name, switch_group=True)))
 
-colors = {"EVEN_WIDGETS": "#668bd7",
-          "ODD_WIDGETS": "#8d62a9",
+colors = {"ODD_WIDGETS": "#668bd7",
+          "EVEN_WIDGETS": "#8d62a9",
           "PANEL_BG": "#292d3e",
           "GROUP_BG": "#434758",
           "TAB_BORDER": "#8d62a9",
@@ -172,14 +172,21 @@ def get_widgets():
             ])
         )
     widgets.extend(
-        get_composite_widget(3, '🔊', 14, [
-            widget.PulseVolume(background = colors["ODD_WIDGETS"])
+        get_composite_widget(3, '💻', 14, [
+            widget.CPU(
+                background = colors["ODD_WIDGETS"],
+                format = '{freq_current}GHz {load_percent}%'),
             ])
         )
     widgets.extend(
-        get_composite_widget(4, '', None, [
+        get_composite_widget(4, '🔊', 14, [
+            widget.PulseVolume(background = colors["EVEN_WIDGETS"])
+            ])
+        )
+    widgets.extend(
+        get_composite_widget(5, '', None, [
             widget.Clock(
-                background = colors["EVEN_WIDGETS"],
+                background = colors["ODD_WIDGETS"],
                 format='%a %b %d  [ %H:%M %p ]'),
             ])
         )
