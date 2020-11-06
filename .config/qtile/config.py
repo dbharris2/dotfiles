@@ -103,7 +103,7 @@ screens = [
                     fontsize = 9,
                     foreground = colors[2],
                     highlight_color = colors[1],
-                    highlight_method = "line",
+                    highlight_method = "block",
                     inactive = colors[2],
                     other_current_screen_border = colors[2],
                     other_screen_border = colors[2],
@@ -111,7 +111,7 @@ screens = [
                     this_screen_border = colors[4],
                     ),
                 widget.Sep(
-                    padding = 40,
+                    padding = 6,
                     ),
                 widget.WindowName(),
                 widget.TextBox(
@@ -120,6 +120,10 @@ screens = [
                     foreground = colors[5],
                     padding = -4,
                     text = '◀',
+                    ),
+                widget.TextBox(
+                    background = colors[5],
+                    text = 'ᗧ',
                     ),
                widget.CheckUpdates(
                     background = colors[5],
@@ -147,6 +151,10 @@ screens = [
                     padding = -4,
                     text = '◀',
                     ),
+                widget.TextBox(
+                    background = colors[5],
+                    text = '🐏',
+                    ),
                 widget.Memory(
                     background = colors[5],
                     ),
@@ -159,7 +167,7 @@ screens = [
                     ),
                 widget.TextBox(
                     background = colors[4],
-                    text = 'Vol:',
+                    text = '🔊',
                     ),
                 widget.PulseVolume(
                     background = colors[4],
