@@ -101,29 +101,106 @@ def get_color(index):
     else:
         return colors["ODD_WIDGETS"]
 
-def get_disclosure_fg_color(index):
-    return get_color(index)
-
-def get_icon_bg_color(index):
-    return get_color(index)
-
-def get_composite_widget(index, icon, icon_size, widgets):
-    composite_widget = [
+class CompositeWidget:
+    @staticmethod
+    def build(index, icon, icon_size):
+        return [
             widget.TextBox(
                 background = get_disclosure_bg_color(index),
                 fontsize = 32,
-                foreground = get_disclosure_fg_color(index),
+                foreground = get_color(index),
                 padding = -4,
                 text = '◀',
                 ),
             widget.TextBox(
-                background = get_icon_bg_color(index),
+                background = get_color(index),
                 fontsize = icon_size,
                 text = icon,
                 ),
-            ]
-    composite_widget.extend(widgets)
-    return composite_widget
+            ] 
+
+class UpdatesWidget(CompositeWidget):
+    @staticmethod
+    def build(index, icon, icon_size):
+        widgets = CompositeWidget.build(index, icon, icon_size)
+        widgets.append(
+            widget.CheckUpdates(
+                background = get_color(index),
+                update_interval = 1800))
+        return widgets
+
+class LayoutWidget(CompositeWidget):
+    @staticmethod
+    def build(index, icon, icon_size):
+        widgets = CompositeWidget.build(index, icon, icon_size)
+        widgets.extend([
+            widget.CurrentLayoutIcon(
+                background = get_color(index),
+                scale = 0.7),
+            widget.CurrentLayout(background = get_color(index)),
+            ])
+        return widgets
+
+class RamWidget(CompositeWidget):
+    @staticmethod
+    def build(index, icon, icon_size):
+        widgets = CompositeWidget.build(index, icon, icon_size)
+        widgets.append(widget.Memory(background = get_color(index)))
+        return widgets
+
+class CpuWidget(CompositeWidget):
+    @staticmethod
+    def build(index, icon, icon_size):
+        widgets = CompositeWidget.build(index, icon, icon_size)
+        widgets.append(
+            widget.CPU(
+                background = get_color(index),
+                format = '{freq_current}GHz {load_percent}%'))
+        return widgets
+
+class VolumeWidget(CompositeWidget):
+    @staticmethod
+    def build(index, icon, icon_size):
+        widgets = CompositeWidget.build(index, icon, icon_size)
+        widgets.append(widget.PulseVolume(background = get_color(index)))
+        return widgets
+
+class ClockWidget(CompositeWidget):
+    @staticmethod
+    def build(index, icon, icon_size):
+        widgets = CompositeWidget.build(index, icon, icon_size)
+        widgets.append(
+            widget.Clock(
+                background = get_color(index),
+                format = '%a %b %d  [ %H:%M %p ]'))
+        return widgets
+
+def get_widget_by_name(name, index):
+    if name == "UPDATES":
+        return UpdatesWidget.build(index, '⟳', 22)
+    elif name == "LAYOUT":
+        return LayoutWidget.build(index, '', None)
+    elif name == "RAM":
+        return RamWidget.build(index, '🐏', 14)
+    elif name == "CPU":
+        return CpuWidget.build(index, '💻', 14)
+    elif name == "VOLUME":
+        return VolumeWidget.build(index, '🔊', 14)
+    elif name == "CLOCK":
+        return ClockWidget.build(index, '', None)
+
+widget_order = ["UPDATES", 
+                "LAYOUT",
+                "CPU",
+                "RAM",
+                "VOLUME",
+                "CLOCK"] 
+
+def get_rhs_widgets():
+    widgets = []
+    for i, name in enumerate(widget_order):
+        widgets.extend(get_widget_by_name(name, i))
+    return widgets
 
 def get_widgets():
     widgets = [
@@ -150,46 +227,7 @@ def get_widgets():
                 ),
             widget.WindowName(),
             ]
-    widgets.extend(
-        get_composite_widget(0, '⟳', 22, [
-            widget.CheckUpdates(
-                background = colors["EVEN_WIDGETS"],
-                update_interval = 1800),
-            ])
-        )
-    widgets.extend(
-        get_composite_widget(1, '', None, [
-            widget.CurrentLayoutIcon(
-                background = colors["ODD_WIDGETS"],
-                scale = 0.7),
-            widget.CurrentLayout(
-                background = colors["ODD_WIDGETS"]),
-            ])
-        )
-    widgets.extend(
-        get_composite_widget(2, '🐏', 14, [
-            widget.Memory(background = colors["EVEN_WIDGETS"]),
-            ])
-        )
-    widgets.extend(
-        get_composite_widget(3, '💻', 14, [
-            widget.CPU(
-                background = colors["ODD_WIDGETS"],
-                format = '{freq_current}GHz {load_percent}%'),
-            ])
-        )
-    widgets.extend(
-        get_composite_widget(4, '🔊', 14, [
-            widget.PulseVolume(background = colors["EVEN_WIDGETS"])
-            ])
-        )
-    widgets.extend(
-        get_composite_widget(5, '', None, [
-            widget.Clock(
-                background = colors["ODD_WIDGETS"],
-                format='%a %b %d  [ %H:%M %p ]'),
-            ])
-        )
+    widgets.extend(get_rhs_widgets())
     return widgets
 
 screens = [Screen(top=bar.Bar(get_widgets(), 24))]
