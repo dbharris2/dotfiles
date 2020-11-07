@@ -26,6 +26,7 @@ keys = [
 
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
+    Key([mod, "control"], "s", lazy.spawn("systemctl suspend")),
 
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod, "shift"], "f", lazy.window.toggle_floating()),
