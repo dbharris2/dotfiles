@@ -118,7 +118,7 @@ class CompositeWidget:
                 fontsize = icon_size,
                 text = icon,
                 ),
-            ] 
+            ]
 
 class UpdatesWidget(CompositeWidget):
     @staticmethod
@@ -173,7 +173,7 @@ class ClockWidget(CompositeWidget):
         widgets.append(
             widget.Clock(
                 background = get_color(index),
-                format = '%a %b %d  [ %H:%M %p ]'))
+                format = '%a %b %d  [ %I:%M %p ]'))
         return widgets
 
 def get_widget_by_name(name, index):
@@ -190,12 +190,12 @@ def get_widget_by_name(name, index):
     elif name == "CLOCK":
         return ClockWidget.build(index, '', None)
 
-widget_order = ["UPDATES", 
+widget_order = ["UPDATES",
                 "LAYOUT",
                 "CPU",
                 "RAM",
                 "VOLUME",
-                "CLOCK"] 
+                "CLOCK"]
 
 def get_rhs_widgets():
     widgets = []
