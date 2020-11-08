@@ -2,6 +2,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ap/vim-css-color'
 Plug 'itchyny/lightline.vim'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
