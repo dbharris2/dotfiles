@@ -32,6 +32,32 @@ alias cleanup='sudo pacman -Qtdq | sudo pacman -Rns -' # Remove orphaned package
 # Text Editing
 alias vim='nvim'
 
+function fish_mode_prompt
+    if test "$fish_key_bindings" = "fish_vi_key_bindings"
+        printf " "
+        switch $fish_bind_mode
+            case default
+                set_color --background red
+                set_color --bold white
+                echo "[N]"
+            case insert
+                set_color --background blue
+                set_color --bold white
+                echo "[I]"
+            case replace-one
+                set_color --background yellow
+                set_color --bold white
+                echo "[R]"
+            case visual
+                set_color --background brmagenta
+                set_color --bold white
+                echo "[V]"
+        end
+        set_color normal
+        printf " "
+    end
+end
+
 function fish_user_key_bindings
     # fish_default_key_bindings
     fish_vi_key_bindings
