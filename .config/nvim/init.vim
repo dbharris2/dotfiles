@@ -1,3 +1,5 @@
+autocmd vimenter * NERDTree
+
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -8,6 +10,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'nanotech/jellybeans.vim'
 Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 
 call plug#end()
@@ -19,6 +22,11 @@ filetype plugin on
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+let NERDTreeShowHidden=1
+
+let g:NERDTreeDirArrowCollapsible = ' 🗁'
+let g:NERDTreeDirArrowExpandable = ' 🗀'
+
 " disable autocompletion because we use deoplete for completion
 let g:jedi#completions_enabled = 0
 
@@ -26,6 +34,8 @@ let g:jedi#completions_enabled = 0
 let g:jedi#use_splits_not_buffers = "right"
 
 let g:deoplete#enable_at_startup = 1
+
+map <C-n> :NERDTreeToggle<CR>
 
 set expandtab
 set hidden
