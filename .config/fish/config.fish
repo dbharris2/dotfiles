@@ -20,6 +20,9 @@ alias rm='rm -i'
 # Git (Dotfiles)
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
+# Image Viewing
+alias preview='feh --scale-down --auto-zoom'
+
 # Navigation
 alias ..='cd ..'
 alias .2='cd ../..'
