@@ -1,4 +1,15 @@
+" Close NERDTree when closing nvim
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Auto-open NERDTree when opening nvim
 autocmd vimenter * NERDTree
+
+" Start focus on file rather than NERDTREE
+augroup NERD
+    au!
+    autocmd VimEnter * NERDTree
+    autocmd VimEnter * wincmd p
+augroup END
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -19,6 +30,10 @@ colorscheme jellybeans
 
 filetype plugin on
 
+" Remap Esc hotkeys
+imap jk <Esc>
+imap kj <Esc>
+
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
@@ -35,6 +50,7 @@ let g:jedi#use_splits_not_buffers = "right"
 
 let g:deoplete#enable_at_startup = 1
 
+" Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
 set expandtab
