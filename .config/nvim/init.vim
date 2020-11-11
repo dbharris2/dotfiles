@@ -1,14 +1,12 @@
 " Close NERDTree when closing nvim
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Auto-open NERDTree when opening nvim
-autocmd vimenter * NERDTree
-
-" Start focus on file rather than NERDTREE
 augroup NERD
     au!
+    " Auto-open NERDTree when opening nvim
     autocmd VimEnter * NERDTree
-    autocmd VimEnter * wincmd p
+    " Start focus on file rather than NERDTREE
+    autocmd VimEnter * wincmd p | call lightline#update()
 augroup END
 
 call plug#begin('~/.config/nvim/plugged')
