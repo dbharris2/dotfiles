@@ -23,6 +23,9 @@ alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 # Image Viewing
 alias preview='feh --scale-down --auto-zoom'
 
+# ls
+alias ls='exa -abhl --group-directories-first'
+
 # Navigation
 alias ..='cd ..'
 alias .2='cd ../..'
