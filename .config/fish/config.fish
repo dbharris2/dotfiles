@@ -6,8 +6,8 @@
 # |___/ \_| |_/
 #
 
-set EDITOR "vim"
-set VISUAL "vim"
+set EDITOR "nvim"
+set VISUAL "nvim"
 set fish_greeting
 
 ### ALIASES ###
