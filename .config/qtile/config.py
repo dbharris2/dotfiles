@@ -199,7 +199,7 @@ def get_widget_by_name(name, index):
     elif name == "VOLUME":
         return VolumeWidget.build(index, "🔊", 14)
     elif name == "CLOCK":
-        return ClockWidget.build(index, "", None)
+        return ClockWidget.build(index, "🕑", 14)
 
 
 widget_order = ["UPDATES", "LAYOUT", "CPU", "RAM", "VOLUME", "CLOCK"]
