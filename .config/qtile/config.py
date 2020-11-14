@@ -128,8 +128,8 @@ class CompositeWidget:
 
 class UpdatesWidget(CompositeWidget):
     @staticmethod
-    def build(index, icon, icon_size):
-        widgets = CompositeWidget.build(index, icon, icon_size)
+    def build(index):
+        widgets = CompositeWidget.build(index, "⟳", 22)
         widgets.append(
             widget.CheckUpdates(background=get_color(index), update_interval=1800)
         )
@@ -138,8 +138,8 @@ class UpdatesWidget(CompositeWidget):
 
 class LayoutWidget(CompositeWidget):
     @staticmethod
-    def build(index, icon, icon_size):
-        widgets = CompositeWidget.build(index, icon, icon_size)
+    def build(index):
+        widgets = CompositeWidget.build(index, "", None)
         widgets.extend(
             [
                 widget.CurrentLayoutIcon(background=get_color(index), scale=0.7),
@@ -151,16 +151,16 @@ class LayoutWidget(CompositeWidget):
 
 class RamWidget(CompositeWidget):
     @staticmethod
-    def build(index, icon, icon_size):
-        widgets = CompositeWidget.build(index, icon, icon_size)
+    def build(index):
+        widgets = CompositeWidget.build(index, "🐏", 14)
         widgets.append(widget.Memory(background=get_color(index)))
         return widgets
 
 
 class CpuWidget(CompositeWidget):
     @staticmethod
-    def build(index, icon, icon_size):
-        widgets = CompositeWidget.build(index, icon, icon_size)
+    def build(index):
+        widgets = CompositeWidget.build(index, "💻", 14)
         widgets.append(
             widget.CPU(
                 background=get_color(index), format="{freq_current}GHz {load_percent}%"
@@ -171,16 +171,16 @@ class CpuWidget(CompositeWidget):
 
 class VolumeWidget(CompositeWidget):
     @staticmethod
-    def build(index, icon, icon_size):
-        widgets = CompositeWidget.build(index, icon, icon_size)
+    def build(index):
+        widgets = CompositeWidget.build(index, "🔊", 14)
         widgets.append(widget.PulseVolume(background=get_color(index)))
         return widgets
 
 
 class ClockWidget(CompositeWidget):
     @staticmethod
-    def build(index, icon, icon_size):
-        widgets = CompositeWidget.build(index, icon, icon_size)
+    def build(index):
+        widgets = CompositeWidget.build(index, "🕑", 14)
         widgets.append(
             widget.Clock(background=get_color(index), format="%a %b %d  [ %I:%M %p ]")
         )
@@ -189,17 +189,17 @@ class ClockWidget(CompositeWidget):
 
 def get_widget_by_name(name, index):
     if name == "UPDATES":
-        return UpdatesWidget.build(index, "⟳", 22)
+        return UpdatesWidget.build(index)
     elif name == "LAYOUT":
-        return LayoutWidget.build(index, "", None)
+        return LayoutWidget.build(index)
     elif name == "RAM":
-        return RamWidget.build(index, "🐏", 14)
+        return RamWidget.build(index)
     elif name == "CPU":
-        return CpuWidget.build(index, "💻", 14)
+        return CpuWidget.build(index)
     elif name == "VOLUME":
-        return VolumeWidget.build(index, "🔊", 14)
+        return VolumeWidget.build(index)
     elif name == "CLOCK":
-        return ClockWidget.build(index, "🕑", 14)
+        return ClockWidget.build(index)
 
 
 widget_order = ["UPDATES", "LAYOUT", "CPU", "RAM", "VOLUME", "CLOCK"]
