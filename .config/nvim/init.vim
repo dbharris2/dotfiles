@@ -19,9 +19,9 @@ Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'nanotech/jellybeans.vim'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
-Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
