@@ -91,39 +91,39 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 
-def get_disclosure_bg_color(index):
-    if index == 0:
-        return colors["PANEL_BG"]
-    elif index % 2 == 0:
-        return colors["ODD_WIDGETS"]
-    else:
-        return colors["EVEN_WIDGETS"]
-
-
-def get_color(index):
-    if index % 2 == 0:
-        return colors["EVEN_WIDGETS"]
-    else:
-        return colors["ODD_WIDGETS"]
-
-
 class CompositeWidget:
     @staticmethod
     def build(index, icon, icon_size):
         return [
             widget.TextBox(
-                background=get_disclosure_bg_color(index),
+                background=CompositeWidget.get_disclosure_bg_color(index),
                 fontsize=32,
-                foreground=get_color(index),
+                foreground=CompositeWidget.get_color(index),
                 padding=-4,
                 text="◀",
             ),
             widget.TextBox(
-                background=get_color(index),
+                background=CompositeWidget.get_color(index),
                 fontsize=icon_size,
                 text=icon,
             ),
         ]
+
+    @staticmethod
+    def get_color(index):
+        if index % 2 == 0:
+            return colors["EVEN_WIDGETS"]
+        else:
+            return colors["ODD_WIDGETS"]
+
+    @staticmethod
+    def get_disclosure_bg_color(index):
+        if index == 0:
+            return colors["PANEL_BG"]
+        elif index % 2 == 0:
+            return colors["ODD_WIDGETS"]
+        else:
+            return colors["EVEN_WIDGETS"]
 
 
 class UpdatesWidget(CompositeWidget):
@@ -131,7 +131,9 @@ class UpdatesWidget(CompositeWidget):
     def build(index):
         widgets = CompositeWidget.build(index, "⟳", 22)
         widgets.append(
-            widget.CheckUpdates(background=get_color(index), update_interval=1800)
+            widget.CheckUpdates(
+                background=CompositeWidget.get_color(index), update_interval=1800
+            )
         )
         return widgets
 
@@ -142,8 +144,10 @@ class LayoutWidget(CompositeWidget):
         widgets = CompositeWidget.build(index, "", None)
         widgets.extend(
             [
-                widget.CurrentLayoutIcon(background=get_color(index), scale=0.7),
-                widget.CurrentLayout(background=get_color(index)),
+                widget.CurrentLayoutIcon(
+                    background=CompositeWidget.get_color(index), scale=0.7
+                ),
+                widget.CurrentLayout(background=CompositeWidget.get_color(index)),
             ]
         )
         return widgets
@@ -153,7 +157,7 @@ class RamWidget(CompositeWidget):
     @staticmethod
     def build(index):
         widgets = CompositeWidget.build(index, "🐏", 14)
-        widgets.append(widget.Memory(background=get_color(index)))
+        widgets.append(widget.Memory(background=CompositeWidget.get_color(index)))
         return widgets
 
 
@@ -163,7 +167,8 @@ class CpuWidget(CompositeWidget):
         widgets = CompositeWidget.build(index, "💻", 14)
         widgets.append(
             widget.CPU(
-                background=get_color(index), format="{freq_current}GHz {load_percent}%"
+                background=CompositeWidget.get_color(index),
+                format="{freq_current}GHz {load_percent}%",
             )
         )
         return widgets
@@ -173,7 +178,7 @@ class VolumeWidget(CompositeWidget):
     @staticmethod
     def build(index):
         widgets = CompositeWidget.build(index, "🔊", 14)
-        widgets.append(widget.PulseVolume(background=get_color(index)))
+        widgets.append(widget.PulseVolume(background=CompositeWidget.get_color(index)))
         return widgets
 
 
@@ -182,7 +187,10 @@ class ClockWidget(CompositeWidget):
     def build(index):
         widgets = CompositeWidget.build(index, "🕑", 14)
         widgets.append(
-            widget.Clock(background=get_color(index), format="%a %b %d  [ %I:%M %p ]")
+            widget.Clock(
+                background=CompositeWidget.get_color(index),
+                format="%a %b %d  [ %I:%M %p ]",
+            )
         )
         return widgets
 
