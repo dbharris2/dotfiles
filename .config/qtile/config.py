@@ -52,12 +52,19 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     )
 
 colors = {
-    "ODD_WIDGETS": "#668bd7",
-    "EVEN_WIDGETS": "#8d62a9",
     "PANEL_BG": "#292d3e",
     "GROUP_BG": "#434758",
     "TAB_BORDER": "#8d62a9",
     "WHITE": "#ffffff",
+}
+
+rainbow_colors = {
+    "R": "#ff3f76",
+    "O": "#ff9433",
+    "Y": "#b4c502",
+    "G": "#29a303",
+    "B": "#33b6ff",
+    "V": "#ba33ff",
 }
 
 layout_theme = {
@@ -111,19 +118,33 @@ class CompositeWidget:
 
     @staticmethod
     def get_color(index):
-        if index % 2 == 0:
-            return colors["EVEN_WIDGETS"]
-        else:
-            return colors["ODD_WIDGETS"]
+        if index == 0:
+            return rainbow_colors["R"]
+        elif index == 1:
+            return rainbow_colors["O"]
+        elif index == 2:
+            return rainbow_colors["Y"]
+        elif index == 3:
+            return rainbow_colors["G"]
+        elif index == 4:
+            return rainbow_colors["B"]
+        elif index == 5:
+            return rainbow_colors["V"]
 
     @staticmethod
     def get_disclosure_bg_color(index):
         if index == 0:
             return colors["PANEL_BG"]
-        elif index % 2 == 0:
-            return colors["ODD_WIDGETS"]
-        else:
-            return colors["EVEN_WIDGETS"]
+        elif index == 1:
+            return rainbow_colors["R"]
+        elif index == 2:
+            return rainbow_colors["O"]
+        elif index == 3:
+            return rainbow_colors["Y"]
+        elif index == 4:
+            return rainbow_colors["G"]
+        elif index == 5:
+            return rainbow_colors["B"]
 
 
 class UpdatesWidget(CompositeWidget):
