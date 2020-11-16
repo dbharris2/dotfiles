@@ -61,7 +61,7 @@ colors = {
 rainbow_colors = {
     "R": "#ff3f76",
     "O": "#ff9433",
-    "Y": "#b4c502",
+    "Y": "#f5c71a",
     "G": "#29a303",
     "B": "#33b6ff",
     "V": "#ba33ff",
