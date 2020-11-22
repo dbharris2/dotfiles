@@ -153,7 +153,12 @@ class UpdatesWidget(CompositeWidget):
         widgets = CompositeWidget.build(index, "⟳", 22)
         widgets.append(
             widget.CheckUpdates(
-                background=CompositeWidget.get_color(index), update_interval=1800
+                background=CompositeWidget.get_color(index),
+                custom_command="yay -Qu",
+                display_format="Updates: {updates}",
+                distro="Arch_yay",
+                no_update_string="Updates: 0",
+                update_interval=1800,
             )
         )
         return widgets
