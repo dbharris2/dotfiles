@@ -36,12 +36,17 @@ keys = [
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master 2%- unmute")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master 2%+ unmute")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master 5%- unmute")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master 5%+ unmute")),
     Key([], "Print", lazy.spawn("flameshot gui")),
 ]
 
-group_names = [("WWW", {"layout": "monadtall"}), ("SLACK", {"layout": "monadtall"})]
+group_names = [
+    ("WWW", {"layout": "monadtall"}),
+    ("SLACK", {"layout": "monadtall"}),
+    ("DEV", {"layout": "monadtall"}),
+    ("VID", {"layout": "monadtall"}),
+]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
@@ -236,7 +241,7 @@ def get_widget_by_name(name, index):
         return ClockWidget.build(index)
 
 
-widget_order = ["UPDATES", "LAYOUT", "CPU", "RAM", "VOLUME", "CLOCK"]
+widget_order = ["CPU", "RAM", "UPDATES", "LAYOUT", "VOLUME", "CLOCK"]
 
 
 def get_rhs_widgets():
