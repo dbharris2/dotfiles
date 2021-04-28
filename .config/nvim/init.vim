@@ -16,9 +16,11 @@ Plug 'ap/vim-css-color'
 Plug 'davidhalter/jedi-vim'
 Plug 'dense-analysis/ale'
 Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'flowtype/vim-flow'
 Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'pangloss/vim-javascript'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 
@@ -36,6 +38,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 let NERDTreeShowHidden=1
 
 let b:ale_fixers = {'python': ['black']}
+let b:ale_linters = ['flow-language-server']
 
 let g:NERDTreeDirArrowCollapsible = ' 🗁'
 let g:NERDTreeDirArrowExpandable = ' 🗀'
